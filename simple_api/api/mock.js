@@ -1,4 +1,4 @@
-export default [
+var users = [
   {
     "id": "5c6bf0b77e76ccabc86150cd",
     "age": 25,
@@ -97,3 +97,7 @@ export default [
     "friends": []
   }
 ]
+
+module.exports = {
+  users: users,
+}

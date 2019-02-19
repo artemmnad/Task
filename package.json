@@ -2,6 +2,7 @@
   "name": "task",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "antd": "^3.13.4",
     "babel-plugin-import": "^1.11.0",
@@ -11,10 +12,12 @@
     "react-dom": "^16.8.2"
   },
   "devDependencies": {
+    "concurrently": "^4.1.0",
     "react-scripts": "2.1.5"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "concurrently \"react-app-rewired start\" \"npm run api\"",
+    "api": "node simple_api/server.js",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
