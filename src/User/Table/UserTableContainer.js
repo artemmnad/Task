@@ -5,7 +5,7 @@ import {
   fetchUsersBegin,
   fetchUsersSuccess,
   fetchUsersFailure
-} from '../User/store/actions';
+} from '../store/actions';
 
 const mapStateToProps = state => {
   console.log('state', state);

@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import { Table, Button } from 'antd';
 import React from 'react';
-import axios from '../utils/axios';
-import {genders} from '../constants';
+import axios from '../../utils/axios';
+import {genders} from '../../constants';
 import { DatePicker } from 'antd';
 
 const { RangePicker } = DatePicker;
@@ -94,6 +94,7 @@ class UserTable extends Component {
       <Table
         columns={this.columns}
         dataSource={this.props.users}
+        loading={this.props.loading}
         rowKey='id'
       />
     );

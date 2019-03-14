@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
-import UserTableContainer from "./User/UserTableContainer";
+import UserTableContainer from './User/Table/UserTableContainer';
 import {
   Layout,
   Select,
@@ -18,8 +18,9 @@ class App extends Component {
             <DatePicker />
           </Header>
           <Content>
-            <Route exact path="/" render={() => (<Redirect to="/users"/>)} />
-            <Route path="/users" component={UserTableContainer} />
+            <Route exact path='/' render={() => (<Redirect to='/users'/>)} />
+            <Route path='/users' component={UserTableContainer} />
+            <Route path='/users/add' component={} />
           </Content>
         </Layout>
       </Router>
