@@ -1,6 +1,7 @@
 export const FETCH_USERS_BEGIN   = 'FETCH_USERS_BEGIN';
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE';
+export const ADD_USER = 'ADD_USER';
 
 export const fetchUsersBegin = () => ({
   type: FETCH_USERS_BEGIN
@@ -18,7 +19,7 @@ export const fetchUsersFailure = error => ({
 
 
 export const addUser = user => ({
-  type: 'ADD_USER',
+  type: ADD_USER,
   user
 });
 

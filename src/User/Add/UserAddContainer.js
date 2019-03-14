@@ -10,13 +10,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  deleteUser: (id) => dispatch(deleteUser(id)),
-  fetchUsersBegin: () => dispatch(fetchUsersBegin()),
-  fetchUsersSuccess: (users) => dispatch(fetchUsersSuccess(users)),
-  fetchUsersFailure: (error) => dispatch(fetchUsersFailure(error))
+  addUser: (user) => dispatch(addUser(user)),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserTable)
+)(UserAdd)
