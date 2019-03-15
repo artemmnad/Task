@@ -17,7 +17,6 @@ export const fetchUsersFailure = error => ({
   payload: { error }
 });
 
-
 export const addUser = user => ({
   type: ADD_USER,
   user
