@@ -6,11 +6,10 @@ import {
   fetchUsersSuccess,
   fetchUsersFailure
 } from '../store/actions';
+import {withRouter} from "react-router-dom";
 
 const mapStateToProps = state => {
-  console.log('state', state);
-  return ({...state
-  });
+  return ({...state});
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -20,7 +19,7 @@ const mapDispatchToProps = dispatch => ({
   fetchUsersFailure: (error) => dispatch(fetchUsersFailure(error))
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserTable)
+)(UserTable));

@@ -4,12 +4,18 @@ import React from 'react';
 import axios from '../../utils/axios';
 import {genders} from '../../constants';
 import { DatePicker } from 'antd';
+import {Link} from "react-router-dom";
 
 const { RangePicker } = DatePicker;
 
 class UserTable extends Component {
 
   componentDidMount() {
+    const users = this.props.users;
+    if (users && users.length) {
+      return;
+    }
+
     this.props.fetchUsersBegin();
 
     axios.get('/users')
@@ -27,6 +33,9 @@ class UserTable extends Component {
   columns = [{
     title: 'Id',
     dataIndex: 'id',
+    render: id => (
+      <Link to={`/users/${id}`}>{id}</Link>
+    )
   }, {
     title: 'Name',
     dataIndex: 'name',
@@ -49,10 +58,9 @@ class UserTable extends Component {
     ),
     filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => {
       return (
-        <div>
+        <span>
           <RangePicker onChange={datePair => {
             const filterKey = datePair[0] ? [{left: datePair[0]._d, right: datePair[1]._d}] : [];
-            console.log(filterKey);
             setSelectedKeys(filterKey);
             confirm();
           }}/>
@@ -72,14 +80,10 @@ class UserTable extends Component {
           >
             Reset
           </Button>
-        </div>);
+        </span>);
     },
-    onFilter: (value, record) => {
-      const filter = value.left <= record.registered && record.registered <= value.right;
-      console.log('value', value);
-      console.log(filter);
-      return filter
-    },
+    onFilter: (value, record) =>
+      (value.left <= record.registered && record.registered <= value.right),
   }, {
     title: 'Delete',
     key: 'action',
@@ -89,7 +93,6 @@ class UserTable extends Component {
   }];
 
   render() {
-    console.log('render', this.props);
     return (
       <Table
         columns={this.columns}

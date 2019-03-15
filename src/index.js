@@ -3,7 +3,8 @@ import { render } from 'react-dom';
 import App from './App';
 import { createStore, applyMiddleware } from 'redux'
 import reducers from './User/store/reducers';
-import {Provider} from "react-redux";
+import {connect, Provider} from 'react-redux';
+import uuidv4 from 'uuid/v4';
 
 const logger = store => next => action => {
   console.log('dispatching', action);
@@ -12,16 +13,22 @@ const logger = store => next => action => {
   return result
 };
 
-// const userUuidGenerator = store => next => action => {
-//   if (action.type === 'ADD_USER') {
-//     console.log('add user middleware');
-//   }
-//   return next(action);
-// };
+const userUuidGenerator = store => next => action => {
+  if (action.type === 'ADD_USER') {
+    console.log('add user middleware');
+    action.user = {
+      ...action.user,
+      registered: new Date(),
+      id: uuidv4(),
+      friends: []
+    };
+  }
+  return next(action);
+};
 
 const store = createStore(
   reducers,
-  applyMiddleware(logger));//, userUuidGenerator));
+  applyMiddleware(userUuidGenerator, logger));
 
 render(
   <Provider store={store}>

@@ -7,6 +7,8 @@ import {
   DatePicker
 } from 'antd';
 import UserAddContainer from "./User/Add/UserAddContainer";
+import UserInfoContainer from "./User/Info/UserInfoContainer";
+import axios from "./utils/axios";
 const { Content, Header } = Layout;
 
 const routes = [
@@ -27,30 +29,40 @@ const routes = [
   }
 ];
 
+const headerLinkStyle = {
+  padding: '10px',
+};
+
 const routesHeader = routes
   .filter(r => !r.redirect)
   .map((route, index) => (
-      <Link key={index}
-            to={route.path}
+      <Link
+        key={index}
+        to={route.path}
+        style={headerLinkStyle}
       >
         {route.header}
       </Link>
   ));
 
 class App extends Component {
+
   render() {
     return (
       <Router>
         <Layout>
-          <Header>
-            <Select />
-            <DatePicker />
-            {/*{routesHeader}*/}
+          <Header style={{padding: '0 10%'}}>
+            {routesHeader}
+            <span>
+              <Select />
+              <DatePicker />
+            </span>
           </Header>
-          <Content>
+          <Content style={{width: '80%', margin: 'auto'}}>
             <Route exact path='/' render={() => (<Redirect to='/users'/>)} />
-            <Route path='/users' component={UserTableContainer} />
-            <Route path='/users/add' component={UserAddContainer} />
+            <Route exact path='/users' component={UserTableContainer} />
+            <Route path='/users/:id' component={UserInfoContainer} />
+            <Route exact path='/users/add' component={UserAddContainer} />
           </Content>
         </Layout>
       </Router>
